@@ -1,70 +1,135 @@
-# Aurelio Voice Assistant 🎙️🤖
+# 🎙️ Aurelio Voice Assistant (The AI Companion)
 
-Aurelio is a smart voice assistant powered by **Google's Gemini 1.5 Flash** model. It listens to your voice commands, processes them using advanced AI, and responds back with synthesized speech. It features memory capabilities, website navigation, and system interactions.
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)
+![Gemini AI](https://img.shields.io/badge/AI-Gemini%201.5%20Flash-orange?style=for-the-badge&logo=google)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-## 🚀 Features
+**Aurelio** is a next-generation, hyper-intelligent voice assistant designed to be your personalized digital companion. Powered by **Google's Gemini 1.5 Flash**, Aurelio bridges the gap between static voice commands and dynamic, conversational AI.
 
-*   **Voice Interaction**: Uses `SpeechRecognition` to listen and `gTTS` to speak.
-*   **AI Intelligence**: Powered by `google-generativeai` (Gemini 1.5 Flash) for natural conversations.
-*   **Wake/Sleep Mode**: Can be put to sleep and woken up with voice commands ("wake up", "sleep").
-*   **Persistent Memory**: Remembers context and user details across sessions via `memory.json`.
-*   **Web & System Control**: Can open websites (Youtube, Google, Instagram, etc.) and launch system applications.
-*   **Conversation History**: Maintains a chat history for context-aware responses.
+It doesn't just "search" things—it **remembers**, **learns**, and **interacts** with your system contextually.
 
-## 🛠️ Installation
+---
 
-1.  **Clone the repository**:
-    ```bash
-    git clone https://github.com/CodeWithHarry123/Aurelio-Voice-Assistant.git
-    cd Aurelio-Voice-Assistant
-    ```
+## 🌟 Supreme Features
 
-2.  **Create a virtual environment** (recommended):
-    ```bash
-    python -m venv .venv
-    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-    ```
+### 🧠 Cognitive AI Core
+- **Powered by Gemini 1.5 Flash:** Experience lightning-fast, context-aware conversations.
+- **Long-Term Memory (LTM):** Aurelio remembers details about you (birthday, preferences, facts) across sessions using a local JSON database (`memory.json`).
+- **Dynamic Context:** Remembers previous turns of conversation for a fluid chat experience.
 
-3.  **Install dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-    *Note: You may need to install `PyAudio` separately if `pip` fails. On macOS: `brew install portaudio` then `pip install pyaudio`.*
+### ⚡ System Automation
+- **Website Navigation:** Instantly opens YouTube, Google, Wikipedia, Instagram, Twitter, and more.
+- **App Launching:** Can launch system applications like Music and Calendar directly from voice commands.
+- **Smart Wake/Sleep Protocols:**
+  - **Wake Word:** "Aurelio" (activates the assistant).
+  - **Sleep Mode:** "Sleep" or "Stop" (conserves resources and stops listening for active queries).
 
-4.  **Set up Environment Variables**:
-    *   Create a `.env` file in the root directory.
-    *   Add your Google Gemini API key:
-        ```env
-        GEMINI_API_KEY=your_actual_api_key_here
-        ```
+### 🛡️ Robust Architecture
+- **Secure Environment:** Uses `.env` for API key security (never hardcoded).
+- **Graceful Error Handling:** Self-healing logic for internet disconnection or unrecognized speech.
+- **Modular Design:** Clean separation of concerns between `main.py` (Orchestrator) and `request.py` (AI Interface).
 
-## ▶️ Usage
+---
 
-Run the main script to start the assistant:
+## 📂 Project Structure
+
+```text
+Aurelio-Voice-Assistant/
+├── main.py              # 🧠 The Brain: Handles voice loops, commands, and memory.
+├── request.py           # 🔌 The Interface: Manages secure connections to Gemini AI.
+├── memory.json          # 💾 The Hippocampus: Stores long-term user data (Auto-generated).
+├── requirements.txt     # 📦 Dependency Manifest: All required libraries.
+├── .env                 # 🔐 Key Vault: Stores your GEMINI_API_KEY (Not committed).
+└── README.md            # 📘 The Manual: This supreme documentation.
+```
+
+---
+
+## 🚀 Installation & Setup
+
+Follow these steps to get Aurelio running perfectly on your local machine.
+
+### Prerequisites
+- **Python 3.10+** installed.
+- **Microphone** connected.
+- **PortAudio** (Required for `PyAudio`):
+  - **macOS:** `brew install portaudio`
+  - **Linux:** `sudo apt-get install python3-pyaudio portaudio19-dev`
+  - **Windows:** Usually pre-installed or handled by pip.
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/CodeWithHarry123/Aurelio-Voice-Assistant.git
+cd Aurelio-Voice-Assistant
+```
+
+### 2. Create a Virtual Environment (Crucial)
+To avoid `ModuleNotFoundError`, always run inside a virtual environment.
+
+**macOS / Linux:**
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+**Windows:**
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+```
+
+### 3. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Configure Security
+Create a file named `.env` in the root folder and add your API key:
+```env
+GEMINI_API_KEY=AIzaSyD...YourActualKeyHere...
+```
+
+---
+
+## 🎮 How to Run
+
+Once setup is complete, launch the assistant:
 
 ```bash
 python main.py
 ```
 
-*   **Wake Word**: "Wake up"
-*   **Sleep Word**: "Sleep", "Stop"
-*   **Exit**: "Exit", "Bye"
+### 🗣️ Voice Command Examples
 
-## 📂 Project Structure
+| Category | Command Example | Action |
+| :--- | :--- | :--- |
+| **Wake Up** | "Wake up Aurelio", "Aurelio" | Activates listening mode. |
+| **Memory** | "Remember that my birthday is August 15th" | Saves to `memory.json`. |
+| **Recall** | "What do you remember about me?" | Reads from memory. |
+| **Forget** | "Forget my birthday" | Deletes specific memory. |
+| **General** | "Tell me a joke", "Who made you?" | AI Conversation. |
+| **System** | "Open Google", "Open Calendar" | System Automation. |
+| **Sleep** | "Go to sleep", "Stop" | Enters standby mode. |
 
-*   `main.py`: The core orchestration script handling the event loop, voice input/output, and command routing.
-*   `request.py`: Handles interactions with the Google Gemini API.
-*   `memory.json`: JSON file storing the assistant's long-term memory.
-*   `testing.py`: Contains experimental code (legacy).
+---
 
-## 🛡️ Security
+## 🔧 Troubleshooting
 
-This project uses a `.env` file to manage sensitive API keys. **Never commit your `.env` file to version control.**
+**Error: `ModuleNotFoundError: No module named 'speech_recognition'`**
+- **Fix:** You are likely running the global Python instead of the virtual environment. Ensure you see `(.venv)` in your terminal, or use `.venv/bin/python main.py`.
 
-## 🤝 Contributing
+**Error: `PyAudio` fails to install**
+- **Fix:** Install the system-level header files.
+  - Mac: `brew install portaudio`
+  - Linux: `sudo apt install portaudio19-dev`
 
-Feel free to fork this repository and submit pull requests.
+**Error: `GoogleGenerativeAI Error`**
+- **Fix:** Check your `.env` file. Ensure `GEMINI_API_KEY` is correct and has no extra spaces.
 
-## 📄 License
+---
 
-[MIT License](LICENSE)
+## 👨‍💻 Contributing
+Contributions are welcome! Fork the repo, make your changes, and submit a PR.
+
+## 📜 License
+This project is licensed under the MIT License - see the LICENSE file for details.
